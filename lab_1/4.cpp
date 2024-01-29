@@ -1,66 +1,57 @@
 #include <iostream>
-#include <algorithm>
 
 class Rect {
-private:
-    int left, top, right, bottom;
-
 public:
-    Rect() : left(0), top(0), right(0), bottom(0) {}
-    Rect(int l, int t, int r, int b) : left(l), top(t), right(r), bottom(b) {}
-    Rect(const Rect& other) : left(other.left), top(other.top), right(other.right), bottom(other.bottom) {}
+    int x, y, width, height;
 
+    Rect() : x(0), y(0), width(0), height(0) {
+        std::cout << "Default constructor called." << std::endl;
+    }
 
-    void InflateRect(int x = 1, int y = 1, int z = 1, int w = 1) {
-        left -= x;
-        top -= y;
-        right += z;
-        bottom += w;
+    Rect(int x, int y, int width, int height) : x(x), y(y), width(width), height(height) {
+        std::cout << "Parametrized constructor called." << std::endl;
+    }
+
+    Rect(const Rect& other) : x(other.x), y(other.y), width(other.width), height(other.height) {
+        std::cout << "Copy constructor called." << std::endl;
     }
 
     void PrintRect() const {
-        std::cout << "Left: " << left << ", Top: " << top << ", Right: " << right << ", Bottom: " << bottom << std::endl;
-    }
-
-    int getLeft() const { return left; }
-    int getTop() const { return top; }
-    int getRight() const { return right; }
-    int getBottom() const { return bottom; }
-
-    // 4b. Метод класса для нахождения ограничивающего прямоугольника
-    Rect BoundingRect(const Rect& other) const {
-        int l_1 = std::min(getLeft(), other.getLeft());
-        int t_1 = std::min(getTop(), other.getTop());
-        int r_2 = std::max(getRight(), other.getRight());
-        int b_2 = std::max(getBottom(), other.getBottom());
-
-        return Rect(l_1, t_1, r_2, b_2);
+        std::cout << "Rect: x=" << x << ", y=" << y << ", width=" << width << ", height=" << height << std::endl;
     }
 };
 
-// 4а. Глобальная функция для нахождения ограничивающего прямоугольника
-Rect BoundingRect2(const Rect& rect1, const Rect& rect2) {
-    int l_1 = std::min(rect1.getLeft(), rect2.getLeft());
-    int t_1 = std::min(rect1.getTop(), rect2.getTop());
-    int r_2 = std::max(rect1.getRight(), rect2.getRight());
-    int b_2 = std::max(rect1.getBottom(), rect2.getBottom());
+// Глобальная функция BoundingRect
+Rect BoundingRect(Rect rect1, Rect rect2) {
+    // Здесь вызывается конструктор копирования для rect1 и rect2
+    int minX = std::min(rect1.x, rect2.x);
+    int minY = std::min(rect1.y, rect2.y);
+    int maxX = std::max(rect1.x + rect1.width, rect2.x + rect2.width);
+    int maxY = std::max(rect1.y + rect1.height, rect2.y + rect2.height);
 
-    return Rect(l_1, t_1, r_2, b_2);
+    return Rect(minX, minY, maxX - minX, maxY - minY);
+}
+
+// Задание 4а. Передача объектов по ссылке.ы
+Rect BoundingRect2(const Rect& rect1, const Rect& rect2) {
+    // Здесь объекты передаются по ссылке, и конструкторы копирования не вызываются
+    int minX = std::min(rect1.x, rect2.x);
+    int minY = std::min(rect1.y, rect2.y);
+    int maxX = std::max(rect1.x + rect1.width, rect2.x + rect2.width);
+    int maxY = std::max(rect1.y + rect1.height, rect2.y + rect2.height);
+
+    return Rect(minX, minY, maxX - minX, maxY - minY);
 }
 
 int main() {
-    Rect r1(1, 2, 3, 4);
-    Rect r2(3, 1, 5, 6);
+    Rect r1(1, 2, 3, 4), r2(5, 6, 7, 8), r3;
 
-    // 4а. Вызов глобальной функции BoundingRect2
-    Rect r3 = BoundingRect2(r1, r2);
-    std::cout << "BoundingRect2 result: ";
+    // Глобальная функция BoundingRect
+    r3 = BoundingRect(r1, r2);
     r3.PrintRect();
 
-    // 4b. Вызов метода BoundingRect для объекта r1
-    Rect r4 = r1.BoundingRect(r2);
-    std::cout << "BoundingRect method result: ";
-    r4.PrintRect();
+    r3 = BoundingRect2(r1, r2);
+    r3.PrintRect();
 
     return 0;
 }
