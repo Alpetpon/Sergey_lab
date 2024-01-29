@@ -1,89 +1,65 @@
 #include <iostream>
 
 // Перечисление для цветов
-enum Color {
-    RED,
-    GREEN,
-    BLUE
-};
+enum Color { RED, GREEN, BLUE };
 
 // Базовый класс Shape
 class Shape {
 protected:
-    Color color;
+    Color color;  // Цвет фигуры
 
 public:
     // Конструктор базового класса с параметром-цветом
     Shape(Color c) : color(c) {
-        std::cout << "Shape constructor" << std::endl;
+        std::cout << "Constructing Shape with color" << std::endl;
     }
 
-    // Виртуальный деструктор для правильного удаления объектов через указатель на базовый класс
+    // Виртуальный деструктор
     virtual ~Shape() {
-        std::cout << "Shape destructor" << std::endl;
+        std::cout << "Destructing Shape" << std::endl;
     }
 
     // Виртуальная функция для вывода информации о фигуре
     virtual void printInfo() const {
-        std::cout << "Shape color: ";
-        switch (color) {
-            case RED:
-                std::cout << "RED";
-                break;
-            case GREEN:
-                std::cout << "GREEN";
-                break;
-            case BLUE:
-                std::cout << "BLUE";
-                break;
-        }
-        std::cout << std::endl;
+        std::cout << "Shape of color: " << color << std::endl;
     }
 };
 
 // Производный класс Rect
 class Rect : public Shape {
-protected:
-    // Дополнительные данные для прямоугольника
-
 public:
-    // Конструктор производного класса Rect
+    // Конструктор производного класса с параметром-цветом
     Rect(Color c) : Shape(c) {
-        std::cout << "Rect constructor" << std::endl;
+        std::cout << "Constructing Rect" << std::endl;
     }
 
-    // Деструктор производного класса Rect
-    ~Rect() override {
-        std::cout << "Rect destructor" << std::endl;
-    }
-
-    // Переопределение виртуальной функции для вывода информации о прямоугольнике
+    // Переопределение виртуальной функции базового класса
     void printInfo() const override {
-        Shape::printInfo();  // Вызов функции базового класса
-        std::cout << "Type: Rectangle" << std::endl;
+        std::cout << "Rectangle of color: " << color << std::endl;
+    }
+
+    // Деструктор производного класса
+    ~Rect() {
+        std::cout << "Destructing Rect" << std::endl;
     }
 };
 
 // Производный класс Circle
 class Circle : public Shape {
-protected:
-    // Дополнительные данные для круга
-
 public:
-    // Конструктор производного класса Circle
+    // Конструктор производного класса с параметром-цветом
     Circle(Color c) : Shape(c) {
-        std::cout << "Circle constructor" << std::endl;
+        std::cout << "Constructing Circle" << std::endl;
     }
 
-    // Деструктор производного класса Circle
-    ~Circle() override {
-        std::cout << "Circle destructor" << std::endl;
-    }
-
-    // Переопределение виртуальной функции для вывода информации о круге
+    // Переопределение виртуальной функции базового класса
     void printInfo() const override {
-        Shape::printInfo();  // Вызов функции базового класса
-        std::cout << "Type: Circle" << std::endl;
+        std::cout << "Circle of color: " << color << std::endl;
+    }
+
+    // Деструктор производного класса
+    ~Circle() {
+        std::cout << "Destructing Circle" << std::endl;
     }
 };
 
