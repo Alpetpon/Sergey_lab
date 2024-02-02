@@ -60,13 +60,39 @@ Rect::~Rect() {
 
 }
 
+
+int Rect::getWidth() const {
+    return width;
+}
+
+int Rect::getHeight() const {
+    return height;
+}
+
+int Rect::getX() const {
+    return x;
+}
+
+int Rect::getY() const {
+    return y;
+}
+
+
 Circle::Circle(Color c) : Shape(c) {
     std::cout << "Constructing Circle" << std::endl;
 }
 
+
+
 Circle::Circle() : Shape(RED) {}
 
-Circle::Circle(const Rect& rect) : Shape(rect.getColor()) {}
+Circle::Circle(const Rect& rect) : Shape(rect.getColor()) {
+    centerX = rect.getWidth() / 2 + rect.getX();
+    centerY = rect.getHeight() / 2 + rect.getY();
+    radius = (rect.getWidth() + rect.getHeight()) / 4;
+}
+
+
 
 void Circle::WhereAmI() const {
     std::cout << "Now I am in class Circle" << std::endl;

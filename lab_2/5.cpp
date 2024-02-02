@@ -3,8 +3,9 @@
 
 int main() {
     Rect r(GREEN);
+    Shape s(RED);
     
-    Shape* ar[] = {new Rect(GREEN), new Circle(RED), new Circle(), new Rect(BLUE)};
+    Shape* ar[]={new Shape(r), new Rect(r), new Circle(r), new Circle() };
     
     for (int i = 0; i < 4; ++i) {
         ar[i]->WhereAmIVirtual();
