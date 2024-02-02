@@ -14,7 +14,7 @@ public:
     void SetNewString(const char* newStr);
     MyString& operator=(const MyString& other);
 
-    const char* GetStr() const;
+
 };
 
 MyString::MyString(const char* str) {
@@ -32,9 +32,6 @@ const char* MyString::GetString() const {
     return m_str;
 }
 
-const char* MyString::GetStr() const {
-    return m_str;
-}
 
 MyString::MyString(const MyString& other) {
     m_str = new char[strlen(other.m_str) + 1];
@@ -69,7 +66,7 @@ int main() {
 
     // Печать строк-членов класса через указатели
     for (int i = 0; i < N; ++i) {
-        std::cout << "arPtr[" << i << "]: " << arPtr[i]->GetStr() << std::endl;
+        std::cout << "arPtr[" << i << "]: " << arPtr[i]->GetString() << std::endl;
     }
 
     // Новый размер массива 
@@ -83,7 +80,7 @@ int main() {
 
     // Печать строк-членов нового массива указателей
     for (int i = 0; i < M; ++i) {
-        std::cout << "arPtrNew[" << i << "]: " << arPtrNew[i]->GetStr() << std::endl;
+        std::cout << "arPtrNew[" << i << "]: " << arPtrNew[i]->GetString() << std::endl;
     }
 
     // Освобождение памяти для каждого созданного объекта старого массива
