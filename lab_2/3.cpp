@@ -1,13 +1,11 @@
 #include "color.h"
 
 int main() {
-    // Создание объектов иерархии
-    Rect rect(RED);
-    Circle circle(GREEN);
-    // Вывод информации о фигурах
-    rect.printInfo();
-    std::cout << std::endl;
-    circle.printInfo();
+    Rect rect(Color::RED, 0, 10, 0, 10);
+    Circle circle(Color::BLUE, 5);
+
+    rect.DisplayInfo();
+    circle.DisplayInfo();
 
     return 0;
 }
