@@ -14,7 +14,6 @@ protected:
 public:
     Shape(Color c);
     ~Shape();
-    //virtual ~Shape() = default;
     
     Color getColor() const;
     virtual void printInfo() const;
