@@ -35,6 +35,15 @@ public:
         result.y = scalar - point.y;
         return result;
     }
+    
+    Point operator-(int scalar) const {
+        Point result;
+        result.x = this->x - scalar;
+        result.y = this->y - scalar;
+        return result;
+    }
+
+
 
     friend std::ostream& operator<<(std::ostream& os, const Point& point) {
         os << "(" << point.x << ", " << point.y << ")";
@@ -51,6 +60,8 @@ int main() {
     std::cout << pt3 << std::endl;
 
     pt3 = pt1 + pt2;
+    std::cout << pt3 << std::endl;
+    pt3 = pt1 - 5;
     std::cout << pt3 << std::endl;
 
     pt3 = 2 - pt1;
