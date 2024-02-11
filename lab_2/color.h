@@ -13,7 +13,8 @@ protected:
 
 public:
     Shape(Color c);
-    ~Shape();
+    Shape(const Shape& other);
+    virtual ~Shape();
     
     Color getColor() const;
     virtual void printInfo() const;
@@ -32,6 +33,7 @@ private:
 
 public:
     Rect(Color c = RED, int width = 0, int height = 0, int x = 0, int y = 0);
+    Rect(const Rect& other);
     ~Rect();
     int getWidth() const;
     int getHeight() const;
@@ -53,6 +55,8 @@ private:
 
 public:
     Circle(Color c = RED, int centerX = 0, int centerY = 0, int radius = 0);
+    Circle(const Circle& other);
+    Circle(const Rect& rect);
     ~Circle();
     void printInfo() const override;
     void Inflate(int factor) override;
