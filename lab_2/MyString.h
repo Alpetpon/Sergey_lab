@@ -13,8 +13,8 @@ public:
     ~MyString();
     const char* c_str() const;
     MyString& operator=(const MyString& other);
-    MyString operator+(const MyString& other) const;
+    MyString operator+(const MyString& other) const; // Добавляем декларацию для оператора +
     friend std::ostream& operator<<(std::ostream& os, const MyString& myStr);
 };
 
-#endif 
+#endif // MYSTRING_H
