@@ -15,19 +15,18 @@ int main()
 	// 1. Создаем список
 	//
 	List ls1;
+	ls1.addToTail(Circle(Point(1, 1), 1));
+	ls1.addToTail(Circle(Point(5, 5), 5));
+	ls1.addToTail(Circle(Point(2, 2), 2));
+	ls1.addToTail(Circle(Point(4, 4), 4));
+	ls1.addToTail(Circle(Point(2, 2), 2));
+	ls1.addToTail(Circle(Point(3, 3), 3));
 	
-	ls1.addToTail(Circle(1, 1, 1));		//добавляем элементы в список
-	ls1.addToTail(Circle(5, 5, 5));
-	ls1.addToTail(Circle(2, 2, 2));	
-	ls1.addToTail(Circle(4, 4, 4));
-	ls1.addToTail(Circle(2, 2, 2));	
-	ls1.addToTail(Circle(3, 3, 3));
 	std::cout << ls1;					//выводим список	
-
-	ls1.remove(Circle(5,5,5));			// удаляем первый элемент, равный заданному
+	ls1.remove(Circle(Point(5, 5), 5));			// удаляем первый элемент, равный заданному
 	std::cout << ls1; 
-
-	ls1.removeAll(Circle(2, 2, 2));     // удаляем все элементы, равные заданному
+	
+	ls1.removeAll(Circle(Point(2, 2), 2));   // удаляем все элементы, равные заданному
 	std::cout << ls1 << sep;	
 	//
 	// 2. Приведенный ниже код должен выполняться корректно	
@@ -38,8 +37,8 @@ int main()
 	List ls3 = ls2;
 	std::cout << ls3; 
 
-	ls2.addToHead(Circle(2, 2, 2));
-	ls2.addToHead(Circle(5, 5, 5));	
+	ls2.addToHead(Circle(Point(2, 2), 2));
+	ls2.addToHead(Circle(Point(5, 5), 5));
 	
 	std::cout << ls2;	
 	ls1 = ls2;			// из "большого" списка в "маленький"

@@ -1,18 +1,21 @@
 #include "Circle.h"
 
-Circle::Circle(int x, int y, int radius) : x(x), y(y), radius(radius) {}
+Circle::Circle(const Point& center, int radius) : center(center), radius(radius) {}
+
 
 std::ostream& operator<<(std::ostream& os, const Circle& circle) {
-    os << "Circle(" << circle.x << ", " << circle.y << ", " << circle.radius << ")";
+    os << "Circle(" << circle.center.getX() << ", " << circle.center.getY() << ", " << circle.radius << ")";
     return os;
 }
 
 bool Circle::operator==(const Circle& other) const {
-    return x == other.x && y == other.y && radius == other.radius;
+    return center.getX() == other.center.getX() && center.getY() == other.center.getY() && radius == other.radius;
 }
 
 std::istream& operator>>(std::istream& is, Circle& circle) {
-    is >> circle.x >> circle.y >> circle.radius;
+    int x, y, radius;
+    is >> x >> y >> radius;
+    circle = Circle(Point(x, y), radius);
     return is;
 }
 

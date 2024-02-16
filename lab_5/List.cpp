@@ -171,7 +171,7 @@ std::ostream& operator<<(std::ostream& os, const List& list) {
 }
 
 std::istream& operator>>(std::istream& is, List& list) {
-    Circle circle(0, 0, 0);
+    Circle circle(Point(0, 0), 0);
     while (is >> circle) {
         list.addToTail(circle);
     }
