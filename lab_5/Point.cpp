@@ -1,7 +1,4 @@
-#ifndef CIRCLE_H
-#define CIRCLE_H
-
-#include "point.h"
+#include "Point.h"
 #include <iostream>
 
 class Circle {
@@ -18,4 +15,3 @@ public:
     int getRadius() const;
 };
 
-#endif
