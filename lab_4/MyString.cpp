@@ -5,16 +5,15 @@
 MyString::MyString(const char* s) {
     // Выделяем память под новую строку и копируем содержимое из переданной строки
     str = new char[strlen(s) + 1]; // Выделяем достаточно памяти для хранения строки и символа завершения '\0'
-    strcpy(str, s); // Копируем содержимое строки s в выделенную память
+    strcpy_s(str, strlen(s) + 1, s); // Копируем содержимое строки s в выделенную память
 }
 
 // Конструктор копирования
 MyString::MyString(const MyString& other) {
-    // Выделяем память под новую строку и копируем содержимое из строки other
-    str = new char[strlen(other.str) + 1];
-    strcpy(str, other.str);
+    // Выделяем память для новой строки и копируем содержимое из другого объекта MyString
+    str = new char[strlen(other.str) + 1]; // Выделяем память на основе длины other.str
+    strcpy_s(str, strlen(other.str) + 1, other.str); // Копируем содержимое other.str в выделенную память
 }
-
 // Деструктор
 MyString::~MyString() {
     delete[] str; // Освобождаем выделенную память при удалении объекта
@@ -25,7 +24,7 @@ MyString& MyString::operator=(const MyString& other) {
     if (this != &other) { // Проверяем, что объекты не совпадают
         delete[] str; // Освобождаем старую память
         str = new char[strlen(other.str) + 1]; // Выделяем новую память
-        strcpy(str, other.str); // Копируем содержимое из другой строки
+        strcpy_s(str, strlen(other.str) + 1, other.str);// Копируем содержимое из другой строки
     }
     return *this; // Возвращаем ссылку на текущий объект
 }
