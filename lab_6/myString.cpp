@@ -6,17 +6,19 @@
 MyString::MyString() : m_str(nullptr) {}
 
 MyString::MyString(const char* str) {
-    m_str = new char[strlen(str) + 1];
-    strcpy(m_str, str);
+    size_t len = strlen(str) + 1;
+    m_str = new char[len];
+    strcpy_s(m_str, len, str);
     Counter* counter = new Counter(str);
-    counter->AddUser(); // Увеличиваем счетчик владельцев при создании новой строки
+    counter->AddUser();
 }
 
 MyString::MyString(const MyString& other) {
-    m_str = new char[strlen(other.m_str) + 1];
-    strcpy(m_str, other.m_str);
+    size_t len = strlen(other.m_str) + 1;
+    m_str = new char[len];
+    strcpy_s(m_str, len, other.m_str);
     Counter* counter = new Counter(m_str);
-    counter->AddUser(); // Увеличиваем счетчик владельцев при создании копии строки
+    counter->AddUser();
 }
 
 
@@ -30,15 +32,17 @@ const char* MyString::GetString() const {
 
 void MyString::SetNewString(const char* newStr) {
     delete[] m_str;
-    m_str = new char[strlen(newStr) + 1];
-    strcpy(m_str, newStr);
+    size_t len = strlen(newStr) + 1;
+    m_str = new char[len];
+    strcpy_s(m_str, len, newStr);
 }
 
 MyString& MyString::operator=(const MyString& other) {
     if (this != &other) {
         delete[] m_str;
-        m_str = new char[strlen(other.m_str) + 1];
-        strcpy(m_str, other.m_str);
+        size_t len = strlen(other.m_str) + 1;
+        m_str = new char[len];
+        strcpy_s(m_str, len, other.m_str);
     }
     return *this;
 }
@@ -50,20 +54,20 @@ std::ostream& operator<<(std::ostream& os, const MyString& myString) {
 
 MyString MyString::operator+(const MyString& other) const {
     MyString result;
-    result.m_str = new char[strlen(m_str) + strlen(other.m_str) + 1];
-    strcpy(result.m_str, m_str);
-    strcat(result.m_str, other.m_str);
+    size_t len = strlen(m_str) + strlen(other.m_str) + 1;
+    result.m_str = new char[len];
+    strcpy_s(result.m_str, len, m_str);
+    strcat_s(result.m_str, len, other.m_str);
     return result;
 }
 
 MyString& MyString::operator+=(const MyString& other) {
-    char* newStr = new char[strlen(m_str) + strlen(other.m_str) + 1];
-    strcpy(newStr, m_str);
-    strcat(newStr, other.m_str);
-
+    size_t len = strlen(m_str) + strlen(other.m_str) + 1;
+    char* newStr = new char[len];
+    strcpy_s(newStr, len, m_str);
+    strcat_s(newStr, len, other.m_str);
     delete[] m_str;
     m_str = newStr;
-
     return *this;
 }
 
@@ -104,7 +108,7 @@ bool compareStrings(const char* a, const char* b) {
 }
 
 void MyString::printAlph() {
-    char** tempStrings = new char*[Counter::GetCurCounters()];
+    char** tempStrings = new char* [Counter::GetCurCounters()];
     Counter* current = Counter::GetHead();
     int i = 0;
     while (current != nullptr) {
