@@ -12,6 +12,9 @@ MyString::MyString(const char* str) {
     Counter* counter = new Counter(str);
     counter->AddUser();
 }
+void MyString::AddUser() {
+    m_counter->IncrementOwners();
+}
 
 MyString::MyString(const MyString& other) {
     size_t len = strlen(other.m_str) + 1;

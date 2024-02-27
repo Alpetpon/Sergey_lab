@@ -2,10 +2,11 @@
 #define MYSTRING_H
 
 #include <iostream>
-
+#include "Counter.h"
 class MyString {
 private:
     char* m_str;
+    Counter* m_counter;
 
 public:
     MyString();
@@ -17,6 +18,7 @@ public:
     void SetNewString(const char* newStr);
     MyString& operator=(const MyString& other);
 
+    void AddUser();
     friend std::ostream& operator<<(std::ostream& os, const MyString& myString);
     MyString operator+(const MyString& other) const;
     MyString& operator+=(const MyString& other);
