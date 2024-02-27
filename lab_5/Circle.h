@@ -10,8 +10,14 @@ private:
     int radius;   // Радиус круга
 
 public:
+    // Конструктор по умолчанию
+    Circle() : center(Point(0, 0)), radius(1) {}
+
     // Конструктор для инициализации объекта Circle с заданным центром и радиусом
     Circle(const Point& center, int radius);
+
+    // Конструктор копирования
+    Circle(const Circle& other);
 
     // Перегрузка оператора << для удобного вывода объектов Circle
     friend std::ostream& operator<<(std::ostream& os, const Circle& circle);

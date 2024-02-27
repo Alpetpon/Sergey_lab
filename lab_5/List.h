@@ -1,27 +1,28 @@
 #ifndef LIST_H
 #define LIST_H
 
-#include "Node.h" // Подключаем заголовочный файл Node.h, который содержит объявление класса Node
-#include <vector>
-#include <fstream>
+#include "Circle.h"
+#include "Node.h"
+#include <iostream>
 
 
 class List {
 private:
-    /*
-    shared_ptr - это умный указатель, который обеспечивает автоматическое управление памятью для динамически выделенных объектов. Умные указатели  управляют временем жизни динамически выделенных ресурсов, таких как объекты классов, без явного вызова операторов new и delete, что существенно упрощает управление памятью
-    */
-    std::shared_ptr<Node> head; // Указатель на начало списка
-    std::shared_ptr<Node> tail; // Указатель на конец списка
+    Node* head; // Указатель на начало списка
+    Node* tail; // Указатель на конец списка
     size_t size; // Размер списка
 
-    // Приватные методы для сортировки списка методом быстрой сортировки
-    void quickSort(std::vector<Circle>& arr, int low, int high);
-    int partition(std::vector<Circle>& arr, int low, int high);
+    Node* partition(Node* start, Node* end);
+
+    // Приватный метод для удаления узла из списка
+    void removeNode(Node* node);
 
 public:
     // Конструктор по умолчанию
     List();
+
+    // Деструктор
+    ~List();
 
     // Метод для добавления элемента в конец списка
     void addToTail(const Circle& circle);
@@ -35,20 +36,12 @@ public:
     // Метод для удаления всех вхождений элемента из списка
     void removeAll(const Circle& circle);
 
+    void quickSort(Node* start, Node* end);
+    
+    double calculateCircleArea(const Circle& circle);
+
     // Метод для сортировки списка
     void sortList();
-
-    // Конструктор копирования
-    List(const List& other);
-
-    // Оператор присваивания
-    List& operator=(const List& other);
-
-    // Конструктор перемещения
-    List(List&& other) noexcept;
-
-    // Оператор перемещения
-    List& operator=(List&& other) noexcept;
 
     // Перегрузка оператора << для вывода списка в поток
     friend std::ostream& operator<<(std::ostream& os, const List& list);
@@ -57,4 +50,4 @@ public:
     friend std::istream& operator>>(std::istream& is, List& list);
 };
 
-#endif 
+#endif

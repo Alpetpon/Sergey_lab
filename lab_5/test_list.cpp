@@ -14,6 +14,7 @@ int main()
 	//
 	// 1. Создаем список
 	//
+	std::cout << 1 << std::endl;
 	List ls1;
 	ls1.addToTail(Circle(Point(1, 1), 1));
 	ls1.addToTail(Circle(Point(5, 5), 5));
@@ -31,7 +32,7 @@ int main()
 	//
 	// 2. Приведенный ниже код должен выполняться корректно	
 	//
-	
+	std::cout << 2 << std::endl;
 	List ls2 = ls1;
 	std::cout << ls2; 
 	List ls3 = ls2;
@@ -50,7 +51,7 @@ int main()
 	//
 	// 3. Вспоминаем про семантику перемещения	
 	//
-
+	std::cout << 3 << std::endl;
 	List ls4 = std::move(ls2);
 	std::cout << ls4; 
 	std::cout << ls2; 	
@@ -61,12 +62,14 @@ int main()
 	//
 	//4.  Сортировка по возрастанию площади кружка
 	//
+	std::cout << 4 << std::endl;
 	std::cout << ls3;
 	ls3.sortList();
 	std::cout << ls3 << sep;
 	//
 	// 5. Файловый ввод/вывод
 	//
+	std::cout << 5 << std::endl;
 	std::ofstream fout("list.txt");
 	fout << ls3;	// выводим список в файл
 	fout.close();

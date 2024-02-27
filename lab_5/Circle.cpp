@@ -1,6 +1,9 @@
 #include "Circle.h"
 
-Circle::Circle(const Point& center, int radius) : center(center), radius(radius) {} // Определение конструктора класса Circle, инициализирующего центр и радиус круга
+Circle::Circle(const Point& center, int radius) : center(center), radius(radius) {}
+
+// Реализация конструктора копирования
+Circle::Circle(const Circle& other) : center(other.center), radius(other.radius) {}
 
 std::ostream& operator<<(std::ostream& os, const Circle& circle) {
     os << "Circle(" << circle.center.getX() << ", " << circle.center.getY() << ", " << circle.radius << ")"; // Вывод информации о круге в формате "Circle(x, y, radius)"
