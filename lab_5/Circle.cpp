@@ -2,6 +2,7 @@
 
 Circle::Circle(const Point& center, int radius) : center(center), radius(radius) {}
 
+
 // Реализация конструктора копирования
 Circle::Circle(const Circle& other) : center(other.center), radius(other.radius) {}
 

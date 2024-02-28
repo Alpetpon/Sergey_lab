@@ -80,5 +80,7 @@ int main()
 	fin.close();
 	
 	std::cout << ls5;
+	
+	
 	return 0;
 }

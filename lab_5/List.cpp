@@ -1,15 +1,20 @@
 #include "List.h"
 
+
 List::List() : head(nullptr), tail(nullptr), size(0) {}
 
 List::~List() {
+    std::cout << "destruct" << std::endl;
     Node* current = head;
     while (current) {
         Node* next = current->next;
         delete current;
         current = next;
     }
+    head = tail = nullptr; // Установка указателей в nullptr для безопасности
+    size = 0; // Сброс размера списка
 }
+
 
 void List::addToTail(const Circle& circle) {
     Node* newNode = new Node(circle);
@@ -60,16 +65,22 @@ void List::removeAll(const Circle& circle) {
 }
 
 void List::removeNode(Node* node) {
+    if (node == nullptr) {
+        return; 
+    }
+
     if (node == head && node == tail) {
         head = tail = nullptr;
     }
     else if (node == head) {
         head = head->next;
-        head->prev = nullptr;
+        if (head)
+            head->prev = nullptr;
     }
     else if (node == tail) {
         tail = tail->prev;
-        tail->next = nullptr;
+        if (tail)
+            tail->next = nullptr;
     }
     else {
         node->prev->next = node->next;
@@ -80,23 +91,24 @@ void List::removeNode(Node* node) {
 }
 
 
+
 double List::calculateCircleArea(const Circle& circle) {
-    return M_PI * circle.getRadius() * circle.getRadius();
+    return 3.14 * circle.getRadius() * circle.getRadius();
 }
 
 void List::sortList() {
     if (size <= 1) {
         return;
     }
-    
+
     bool swapped;
     Node* current;
     Node* lastNode = nullptr;
-    
+
     do {
         swapped = false;
         current = head->next;
-        
+
         while (current->next != lastNode) {
             if (calculateCircleArea(current->data) > calculateCircleArea(current->next->data)) {
                 Circle temp = current->data;
