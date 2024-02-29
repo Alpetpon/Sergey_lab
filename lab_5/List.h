@@ -1,39 +1,11 @@
 #ifndef LIST_H
 #define LIST_H
 
+#include "Node.h"
 #include <cstddef> // Для size_t
 #include <iostream>
 #include <fstream> // Для ifstream
 
-// Класс для представления точки
-class Point {
-public:
-    double x;
-    double y;
-    Point(double xCoord = 0, double yCoord = 0);
-};
-
-// Класс для представления круга
-class Circle {
-public:
-    Point center;
-    double radius;
-    Circle(const Point& centerPoint = Point(), double rad = 0);
-};
-
-// Класс для представления узла списка
-class Node {
-public:
-    Node* pPrev; // указатель на предыдущий элемент
-    Node* pNext; // указатель на следующий элемент
-    Circle m_Data;
-
-    Node();
-    Node(const Circle& circle, Node* prevNode = nullptr, Node* nextNode = nullptr);
-    ~Node();
-};
-
-// Класс для представления списка
 class List {
 private:
     Node Head;     // фиктивный элемент, который является признаком начала списка
@@ -68,4 +40,4 @@ public:
     friend std::ifstream& operator>>(std::ifstream& ifs, List& list);
 };
 
-#endif // LIST_H
+#endif

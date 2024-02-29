@@ -1,35 +1,13 @@
 #ifndef CIRCLE_H
 #define CIRCLE_H
 
-#include "Point.h" 
-#include <iostream>
+#include "Point.h"
 
 class Circle {
-private:
-    Point center; // Центр круга, представленный объектом Point
-    int radius;   // Радиус круга
-
 public:
-    // Конструктор по умолчанию
-    Circle() : center(Point(0, 0)), radius(1) {}
-
-    // Конструктор для инициализации объекта Circle с заданным центром и радиусом
-    Circle(const Point& center, int radius);
-
-    // Конструктор копирования
-    Circle(const Circle& other);
-
-    // Перегрузка оператора << для удобного вывода объектов Circle
-    friend std::ostream& operator<<(std::ostream& os, const Circle& circle);
-
-    // Перегрузка оператора == для сравнения объектов Circle на равенство
-    bool operator==(const Circle& other) const;
-
-    // Перегрузка оператора >> для удобного ввода объектов Circle
-    friend std::istream& operator>>(std::istream& is, Circle& circle);
-
-    // Функция-геттер для получения радиуса круга
-    int getRadius() const;
+    Point center;
+    double radius;
+    Circle(const Point& centerPoint = Point(), double rad = 0);
 };
 
 #endif

@@ -1,20 +1,5 @@
 #include "List.h"
 
-// Определения методов класса Point
-Point::Point(double xCoord, double yCoord) : x(xCoord), y(yCoord) {}
-
-// Определения методов класса Circle
-Circle::Circle(const Point& centerPoint, double rad) : center(centerPoint), radius(rad) {}
-
-// Определения методов класса Node
-Node::Node() : pPrev(nullptr), pNext(nullptr) {}
-
-Node::Node(const Circle& circle, Node* prevNode, Node* nextNode)
-    : m_Data(circle), pPrev(prevNode), pNext(nextNode) {}
-
-Node::~Node() {}
-
-// Определения методов класса List
 List::List() : m_size(0) {
     Head.pNext = &Tail;
     Tail.pPrev = &Head;
@@ -93,7 +78,6 @@ void List::sortList() {
     for (Node* i = Head.pNext; i != &Tail; i = i->pNext) {
         for (Node* j = i->pNext; j != &Tail; j = j->pNext) {
             if (i->m_Data.radius > j->m_Data.radius) {
-                // Обмен значениями
                 Circle temp = i->m_Data;
                 i->m_Data = j->m_Data;
                 j->m_Data = temp;
@@ -124,7 +108,6 @@ std::ifstream& operator>>(std::ifstream& ifs, List& list) {
     return ifs;
 }
 
-// Конструктор копирования
 List::List(const List& other) : m_size(0) {
     Head.pNext = &Tail;
     Tail.pPrev = &Head;
@@ -135,11 +118,9 @@ List::List(const List& other) : m_size(0) {
     }
 }
 
-
-//Оператор присваивания
-List & List::operator=(const List & other) {
+List& List::operator=(const List& other) {
     if (this != &other) {
-        clear(); // Очищаем текущий список
+        clear();
 
         Node* current = other.Head.pNext;
         while (current != &other.Tail) {
@@ -150,35 +131,31 @@ List & List::operator=(const List & other) {
     return *this;
 }
 
-// Оператор перемещения
 List::List(List&& other) noexcept : m_size(0) {
-    // Переносим указатели на голову и хвост
     Head.pNext = other.Head.pNext;
     Tail.pPrev = other.Tail.pPrev;
 
-    // Переносим размер
+
     m_size = other.m_size;
 
-    // Устанавливаем указатели в другом списке в состояние по умолчанию
+
     other.Head.pNext = &other.Tail;
     other.Tail.pPrev = &other.Head;
     other.m_size = 0;
 }
 
-// Оператор перемещения
 List& List::operator=(List&& other) noexcept {
     if (this != &other) {
-        // Очищаем текущий список
         clear();
 
-        // Переносим указатели на голову и хвост
+
         Head.pNext = other.Head.pNext;
         Tail.pPrev = other.Tail.pPrev;
 
-        // Переносим размер
+
         m_size = other.m_size;
 
-        // Устанавливаем указатели в другом списке в состояние по умолчанию
+
         other.Head.pNext = &other.Tail;
         other.Tail.pPrev = &other.Head;
         other.m_size = 0;

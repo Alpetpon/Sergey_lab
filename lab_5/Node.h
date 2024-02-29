@@ -1,15 +1,17 @@
 #ifndef NODE_H
 #define NODE_H
 
-#include "Circle.h" 
+#include "Circle.h"
 
-struct Node {
-    Circle data; // Данные узла
-    Node* next; // Указатель на следующий узел
-    Node* prev; // Указатель на предыдущий узел
+class Node {
+public:
+    Node* pPrev; // указатель на предыдущий элемент
+    Node* pNext; // указатель на следующий элемент
+    Circle m_Data;
 
-    // Конструктор узла
-    Node(const Circle& circle);
+    Node();
+    Node(const Circle& circle, Node* prevNode = nullptr, Node* nextNode = nullptr);
+    ~Node();
 };
 
 #endif

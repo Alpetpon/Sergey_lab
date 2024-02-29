@@ -1,3 +1,8 @@
 #include "Node.h"
 
-Node::Node(const Circle& circle) : data(circle), next(nullptr), prev(nullptr) {}
+Node::Node() : pPrev(nullptr), pNext(nullptr) {}
+
+Node::Node(const Circle& circle, Node* prevNode, Node* nextNode)
+    : m_Data(circle), pPrev(prevNode), pNext(nextNode) {}
+
+Node::~Node() {}
